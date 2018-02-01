@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 09:49:00 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 08:53:24 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/01 10:48:22 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ typedef struct		s_room
 {
 	char			*name;
 	t_list			*lk_rooms;
+	int				check;
 	struct s_room	*next;
 }					t_room;
 
 typedef struct		s_lemin
 {
+	t_list			**path;
 	t_list			*params;
 	t_room			*rooms;
 	char			*start;

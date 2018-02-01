@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 08:05:43 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 09:26:19 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/01 10:12:44 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	check_double(t_lemin *data)
 			tmp_3 = tmp_2;
 			while (tmp_3->next)
 			{
-				if (!ft_strcmp((char*)tmp_2->content,
-				(char*)tmp_3->next->content))
+				if (!ft_strcmp(((t_room*)tmp_2->content)->name,
+				((t_room*)tmp_3->next->content)->name))
 					failure();
 				tmp_3 = tmp_3->next;
 			}
@@ -49,8 +49,8 @@ static void	add_links(t_room *stock_1, t_room *stock_2)
 		failure();
 	if (!(new_2 = ft_lstnew(NULL, 0)))
 		failure();
-	new_1->content = (void*)stock_1->name;
-	new_2->content = (void*)stock_2->name;
+	new_1->content = (void*)stock_1;
+	new_2->content = (void*)stock_2;
 	if (stock_1->lk_rooms)
 		new_2->next = stock_1->lk_rooms;
 	stock_1->lk_rooms = new_2;

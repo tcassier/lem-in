@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 05:53:01 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 09:29:42 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/01 10:53:47 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void		check_hash(t_lemin *data, t_list *tmp)
 		else
 			failure();
 	}
+	free(str);
 }
 
 static void		check_data(t_lemin *data, t_list *tmp)
