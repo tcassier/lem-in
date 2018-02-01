@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   failure.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/12 19:36:49 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 04:50:43 by tcassier         ###   ########.fr       */
+/*   Created: 2018/02/01 04:48:14 by tcassier          #+#    #+#             */
+/*   Updated: 2018/02/01 07:55:16 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+void	failure(void)
 {
-	write(fd, s, ft_strlen(s));
+	ft_putstr_fd("ERROR\n", 2);
+	exit(EXIT_FAILURE);
 }

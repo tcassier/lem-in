@@ -1,18 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/12 19:36:49 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 04:50:43 by tcassier         ###   ########.fr       */
+/*   Created: 2018/02/01 07:40:37 by tcassier          #+#    #+#             */
+/*   Updated: 2018/02/01 08:05:30 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+void	tab_del(char **tab)
 {
-	write(fd, s, ft_strlen(s));
+	int	index;
+
+	index = -1;
+	while (tab[++index])
+		free(tab[index]);
+}
+
+int		is_int(char *str)
+{
+	int	index;
+
+	index = -1;
+	if (str[0] == '-')
+		index++;
+	while (str[++index])
+	{
+		if (!ft_isdigit(str[index]))
+			return (0);
+	}
+	if (index > 2 && ft_atoi_sec(str) == -1)
+		return (0);
+	return (1);
 }

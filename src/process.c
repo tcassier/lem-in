@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/12 19:36:49 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 04:50:43 by tcassier         ###   ########.fr       */
+/*   Created: 2018/02/01 03:16:04 by tcassier          #+#    #+#             */
+/*   Updated: 2018/02/01 03:16:06 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lemin.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+void		process(t_lemin *data)
 {
-	write(fd, s, ft_strlen(s));
 }

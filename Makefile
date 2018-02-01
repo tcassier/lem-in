@@ -6,7 +6,7 @@
 #    By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/07 23:19:18 by tcassier          #+#    #+#              #
-#    Updated: 2018/01/31 09:56:56 by tcassier         ###   ########.fr        #
+#    Updated: 2018/02/01 08:53:44 by tcassier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,12 @@ CFLAGS = -Wall -Werror -Wextra -I$(INC_PATH) -I$(LFT_INC_PATH)
 
 SRC_PATH = ./src/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
-SRC = main.c
+SRC = check_links.c           \
+	  check_rooms.c           \
+	  failure.c               \
+	  main.c                  \
+	  parser.c                \
+	  tools.c
 
 OBJ_PATH = ./obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
@@ -36,7 +41,7 @@ LFT_FLAGS = -L $(LFT_PATH) -lft
 all: $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJS)
-	@make -C $(LFT_PATH) re
+	@make -C $(LFT_PATH) all
 	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(LFT_FLAGS)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INCS)
