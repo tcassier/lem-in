@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:38:05 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/03 16:41:33 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/03 18:55:05 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void			get_path(t_lemin *data)
 	t_list		*tmp;
 
 	if (!(data->path = (t_list**)ft_memalloc(sizeof(t_list*)
-	* room_number(data))))
+	* (room_number(data) + 1))))
 		failure();
 	data->path[0] = get_start(data);
 	tmp = ((t_room*)data->path[0]->content)->lk_rooms;

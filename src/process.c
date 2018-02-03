@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 03:16:04 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/03 18:23:23 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/03 18:49:51 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	get_len(t_lemin *data)
 	int		index;
 
 	index = 0;
-	while (data->path[index])
+	while (data->path[index] != NULL)
 		index++;
 	return (index);
 }
