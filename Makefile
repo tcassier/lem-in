@@ -6,7 +6,7 @@
 #    By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/07 23:19:18 by tcassier          #+#    #+#              #
-#    Updated: 2018/02/01 08:53:44 by tcassier         ###   ########.fr        #
+#    Updated: 2018/02/03 14:34:47 by tcassier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,10 @@ SRCS = $(addprefix $(SRC_PATH), $(SRC))
 SRC = check_links.c           \
 	  check_rooms.c           \
 	  failure.c               \
+	  get_path.c              \
 	  main.c                  \
 	  parser.c                \
+	  process.c               \
 	  tools.c
 
 OBJ_PATH = ./obj/

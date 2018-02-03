@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 09:49:00 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 10:48:22 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/03 18:23:32 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ typedef struct		s_lemin
 void				check_links(t_lemin *data, t_list *tmp);
 t_list				*check_rooms(t_lemin *data, t_list *tmp);
 void				failure();
+void				get_path(t_lemin *data);
 int					is_int(char *str);
 void				parser(t_lemin *data);
+void				process(t_lemin *data);
 void				tab_del(char **tab);
 #endif

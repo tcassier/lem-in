@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:38:05 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 15:58:44 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/03 16:41:33 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,55 +27,63 @@ static int		room_number(t_lemin *data)
 	return (count);
 }
 
-static t_room	*get_start(t_lemin *data)
+static void		*get_start(t_lemin *data)
 {
 	t_room		*tmp;
+	t_list		*new;
 
+	if (!(new = ft_lstnew(NULL, 0)))
+		failure();
 	tmp = data->rooms;
 	while (ft_strcmp(tmp->name, data->start))
 		tmp = tmp->next;
-	return (tmp);
+	new->content = (void*)tmp;
+	return (new);
 }
 
-static int		check_double(t_lemin *data, t_list *room, int check)
+static int		check_double(t_lemin *data, t_room *room, int check)
 {
 	int			index;
 
-	index = 0; 
+	index = 0;
 	while (index < check)
 	{
-		if (data->path[index] == room)
+		if ((t_room*)data->path[index]->content == room)
 			return (1);
 		index++;
 	}
 	return (0);
 }
 
-static int		backtrack(t_lemin *data, t_list *tmp, int rn)
+static int		backtrack(t_lemin *data, t_list *tmp, int index)
 {
-	int			index;
-
-	index = 1;
 	while (tmp)
 	{
 		data->path[index] = tmp;
-		if (check_double(data, data->path[index], index))
-			return (0);
+		if (!check_double(data, (t_room*)tmp->content, index))
+		{
+			if (!ft_strcmp(((t_room*)tmp->content)->name, data->end) ||
+			backtrack(data, ((t_room*)tmp->content)->lk_rooms, index + 1))
+				return (1);
+			else
+				data->path[index] = NULL;
+		}
+		else
+			data->path[index] = NULL;
 		tmp = tmp->next;
 	}
+	return (0);
 }
 
 void			get_path(t_lemin *data)
 {
-	int			rn;
-	int			index;
 	t_list		*tmp;
 
-	rn = room_number(data);
-	if (!(data->path = (t_room**)ft_memalloc(sizeof(t_room*) * (rn + 1))))
+	if (!(data->path = (t_list**)ft_memalloc(sizeof(t_list*)
+	* room_number(data))))
 		failure();
 	data->path[0] = get_start(data);
-	tmp = (data->path)[0]->lk_rooms;
-	if (backtrack(data, tmp, rn) == -1)
+	tmp = ((t_room*)data->path[0]->content)->lk_rooms;
+	if (!backtrack(data, tmp, 1))
 		failure();
 }
