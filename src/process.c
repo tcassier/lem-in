@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 03:16:04 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/03 18:49:51 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/04 12:30:21 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,28 @@ static void	print_ants(t_lemin *data, int len)
 {
 	int		index;
 
-	index = 1;
-	while (index < len)
+	if (len == 2)
 	{
-		if (data->path[index]->content_size > 0 &&
-		data->path[index]->content_size != (size_t)-1)
-			ft_printf("L%zu-%s ", data->path[index]->content_size,
-			((t_room*)data->path[index]->content)->name);
-		index++;
+		index = 1;
+		while (index <= data->ants)
+		{
+			ft_printf("L%d-%s \n", index, data->end);
+			index++;
+		}
 	}
-	ft_printf("\n");
+	else
+	{
+		index = len - 1;
+		while (index)
+		{
+			if (data->path[index]->content_size > 0 &&
+			data->path[index]->content_size != (size_t)-1)
+				ft_printf("L%zu-%s ", data->path[index]->content_size,
+				((t_room*)data->path[index]->content)->name);
+			index--;
+		}
+		ft_printf("\n");
+	}
 }
 
 static void	compute_ants(t_lemin *data, int len)
@@ -79,14 +91,19 @@ static void	compute_ants(t_lemin *data, int len)
 void		process(t_lemin *data)
 {
 	int		len;
+	t_list	*tmp;
 
 	len = get_len(data);
-	while (data->params)
+	tmp = data->params;
+	while (tmp)
 	{
-		ft_printf("%s\n", (char*)data->params->content);
-		data->params = data->params->next;
+		ft_printf("%s\n", (char*)tmp->content);
+		tmp = tmp->next;
 	}
 	ft_printf("\n");
 	data->path[0]->content_size = (size_t)data->ants;
-	compute_ants(data, len);
+	if (len == 2)
+		print_ants(data, len);
+	else
+		compute_ants(data, len);
 }
