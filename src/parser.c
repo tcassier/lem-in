@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 03:15:47 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/05 14:28:31 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/05 21:19:27 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			parser(t_lemin *data)
 		else
 			data->params = tmp;
 	}
-	if (ret == -1)
+	if (ret == -1 || !data->params)
 		failure();
 	if (!(tmp = get_ants(data)))
 		failure();
