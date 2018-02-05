@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 19:25:44 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/01 06:25:13 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/05 18:28:35 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int					ft_atoi_sec(const char *str)
 		str++;
 	sign = (*str == '-') ? -1 : 1;
 	if (*str == '+' || *str == '-')
+		str++;
+	while (*str == '0' && *str)
 		str++;
 	while (ft_isdigit(str[index]))
 		index++;
