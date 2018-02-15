@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 16:24:11 by tcassier          #+#    #+#             */
-/*   Updated: 2018/01/20 01:17:04 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/15 21:27:01 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,22 @@ static void	apply_prec(char **ret, t_print *data, t_list *chunk, int sign)
 	char	*tmp;
 	size_t	len;
 
-	len = data->option[PREC] - chunk->content_size + (sign < 0);
-	if ((tmp = ft_strnew(len)))
+	if (ft_strchr("fF", data->conv))
 	{
-		tmp = ft_memset(tmp, '0', len);
-		*ret = ft_strinsert(&tmp, ret, data->option[PREFIX], 'B');
-		chunk->content_size = (size_t)data->option[PREC] + (sign < 0);
+		if (data->option[PREC] == 0)
+			chunk->content_size = ft_lfstrlen(*ret);
+		else if (data->option[PREC] <= 6)
+			chunk->content_size = ft_lfstrlen(*ret) + data->option[PREC] + 1;
+	}
+	else
+	{
+		len = data->option[PREC] - chunk->content_size + (sign < 0);
+		if ((tmp = ft_strnew(len)))
+		{
+			tmp = ft_memset(tmp, '0', len);
+			*ret = ft_strinsert(&tmp, ret, data->option[PREFIX], 'B');
+			chunk->content_size = (size_t)data->option[PREC] + (sign < 0);
+		}
 	}
 }
 
@@ -60,9 +70,10 @@ static void	*apply_int(char *ret, t_print *data, t_list *chunk, int opt[8])
 	}
 	if (data->conv == 'p' || (opt[HASH] && ft_strchr("boOxX", data->conv)))
 		apply_prefix(&ret, data, chunk, opt);
-	if (opt[PREC] != -1 && chunk->content_size - (sign < 0) < (size_t)opt[PREC])
+	if ((opt[PREC] != -1 && chunk->content_size - (sign < 0) <
+	(size_t)opt[PREC]) || (ft_strchr("fF", data->conv) && opt[PREC] != -1))
 		apply_prec(&ret, data, chunk, sign);
-	if ((opt[SPACE] || opt[PLUS]) && sign > 0 && ft_strchr("dDi", data->conv))
+	if ((opt[SPACE] || opt[PLUS]) && sign > 0 && ft_strchr("dDifF", data->conv))
 	{
 		tmp = opt[PLUS] ? "+" : " ";
 		ret = ft_strappend(&tmp, &ret, 'S');
@@ -86,7 +97,8 @@ static void	*apply_width(char *ret, t_print *data, t_list *chunk, int opt[8])
 	len = ((size_t)opt[WIDTH] > chunk->content_size) ?
 	opt[WIDTH] - chunk->content_size : 0;
 	tmp = ft_strnew(len);
-	c = (!opt[MINUS] && opt[ZERO] && (opt[PREC] == -1 ||
+	c = (((!opt[MINUS] && opt[ZERO]) || (opt[ZERO] &&
+	ft_strchr("fF", data->conv))) && (opt[PREC] == -1 ||
 	!ft_strchr("dDioOuU", data->conv))) ? '0' : ' ';
 	tmp = tmp ? ft_memset(tmp, c, len) : NULL;
 	if (opt[MINUS])

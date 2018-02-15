@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lflen.c                                         :+:      :+:    :+:   */
+/*   ft_lfstrlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/18 07:56:52 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/15 18:35:06 by tcassier         ###   ########.fr       */
+/*   Created: 2018/02/15 20:46:47 by tcassier          #+#    #+#             */
+/*   Updated: 2018/02/15 21:17:58 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_lflen(double n)
+int		ft_lfstrlen(char *str)
 {
-	size_t	ret;
-	int		n_int;
+	int	count;
 
-	ret = 0;
-	if (n < 0)
-	{
-		ret++;
-		n = -n;
-	}
-	n_int = (int)n;
-	while (n_int)
-	{
-		n_int /= 10;
-		ret++;
-	}
-	ret += 7;
-	return (ret);
+	count = 1;
+	while (str[count] && str[count] != '.')
+		count++;
+	return (count);
 }

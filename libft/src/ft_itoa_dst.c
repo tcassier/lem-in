@@ -6,13 +6,13 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 19:28:06 by tcassier          #+#    #+#             */
-/*   Updated: 2018/01/18 10:10:02 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/15 20:16:28 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_itoa_dst(char *dst, intmax_t n)
+int				ft_itoa_dst(char *dst, intmax_t n)
 {
 	intmax_t	tmp_n;
 	int			length;
@@ -35,5 +35,5 @@ char			*ft_itoa_dst(char *dst, intmax_t n)
 	}
 	if (sign == -1)
 		dst[0] = '-';
-	return (dst);
+	return (ft_strlen(dst));
 }

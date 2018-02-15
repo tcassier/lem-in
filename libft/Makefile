@@ -6,7 +6,7 @@
 #    By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/15 23:45:03 by tcassier          #+#    #+#              #
-#    Updated: 2018/01/20 04:27:41 by tcassier         ###   ########.fr        #
+#    Updated: 2018/02/15 20:58:15 by tcassier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = ft_atoi.c                \
 	  ft_atoi_sec.c            \
 	  ft_bzero.c               \
 	  ft_count_word.c          \
+	  ft_getfile.c             \
 	  ft_imaxtoa_base.c        \
 	  ft_isalnum.c             \
 	  ft_isalpha.c             \
@@ -38,6 +39,8 @@ SRC = ft_atoi.c                \
 	  ft_itoa_dst.c            \
 	  ft_itoa_base.c           \
 	  ft_lflen.c               \
+	  ft_lfstrlen.c            \
+	  ft_lftoa.c               \
 	  ft_lstadd.c              \
 	  ft_lstadd_back.c         \
 	  ft_lstdel.c              \
@@ -63,6 +66,7 @@ SRC = ft_atoi.c                \
 	  ft_nbrlen_base.c         \
 	  ft_nbrlen_imax_base.c    \
 	  ft_nbrlen_uimax_base.c   \
+	  ft_perror.c              \
 	  ft_pr_apply.c            \
 	  ft_pr_convert.c          \
 	  ft_pr_flag.c             \
