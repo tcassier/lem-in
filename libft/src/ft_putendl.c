@@ -6,14 +6,17 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 19:36:01 by tcassier          #+#    #+#             */
-/*   Updated: 2018/01/12 19:36:02 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/21 19:15:17 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl(char	const *s)
+int		ft_putendl(char	const *s)
 {
-	write(1, s, ft_strlen(s));
-	write(1, "\n", 1);
+	int	ret;
+
+	if ((ret = write(1, s, ft_strlen(s))) >= 0)
+		ret = write(1, "\n", 1);
+	return (ret);
 }

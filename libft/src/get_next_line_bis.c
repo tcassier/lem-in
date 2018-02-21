@@ -1,52 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 19:42:52 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/21 19:29:45 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/21 19:34:28 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			gnl_free_bis(char **line, char **rest, int check)
+static t_list		*check_fd(t_list **begin_list, size_t fd)
 {
-	if (!check)
+	t_list			*prev;
+	t_list			*tmp;
+
+	tmp = *begin_list;
+	prev = NULL;
+	while (tmp)
 	{
-		if (line && *line)
-			ft_strdel(line);
-		ft_strdel(rest);
+		if (fd == tmp->content_size)
+			return (tmp);
+		prev = tmp;
+		tmp = tmp->next;
 	}
-	return (check == 0 ? -1 : 1);
+	if (!(tmp = (t_list*)ft_memalloc(sizeof(t_list))))
+		return (NULL);
+	tmp->content_size = fd;
+	if (prev)
+		prev->next = tmp;
+	else
+		*begin_list = tmp;
+	return (tmp);
 }
 
-static size_t		rest_instance(char *rest, char **line)
+static size_t		rest_instance(t_list *file, char **line)
 {
 	size_t			index;
 	char			*tmp;
 
 	index = -1;
 	*line = NULL;
-	if (rest)
+	if (file->content)
 	{
-		while (rest[++index])
+		while (((char*)file->content)[++index])
 		{
-			if (rest[index] == '\n')
+			if (((char*)file->content)[index] == '\n')
 			{
-				if (!(*line = ft_strndup(rest, index)))
+				if (!(*line = ft_strndup((char*)file->content, index)))
 					return (0);
-				tmp = rest;
-				if (!(rest = ft_strdup(rest + index + 1)))
+				tmp = (char*)file->content;
+				if (!(file->content = (void*)ft_strdup((char*)file->content
+				+ index + 1)))
 					return (0);
 				free(tmp);
 				return (1);
 			}
 		}
-		*line = rest;
-		rest = NULL;
+		*line = (char*)file->content;
+		file->content = NULL;
 	}
 	return (2);
 }
@@ -71,7 +85,7 @@ static size_t		create_line(char *buffer, char **line, size_t index)
 	return (1);
 }
 
-static size_t		get_line(char *buffer, char *rest, char **line)
+static size_t		get_line(char *buffer, t_list *file, char **line)
 {
 	size_t			index;
 	int				ret;
@@ -82,7 +96,7 @@ static size_t		get_line(char *buffer, char *rest, char **line)
 		index++;
 	if (buffer[index] == '\n')
 	{
-		if (!(rest = ft_strdup(buffer + index + 1)))
+		if (!(file->content = (void*)ft_strdup(buffer + index + 1)))
 			return (0);
 		ret = 1;
 	}
@@ -91,21 +105,23 @@ static size_t		get_line(char *buffer, char *rest, char **line)
 	return (ret);
 }
 
-int					get_next_line(const int fd, char **line)
+int					get_next_line_bis(const int fd, char **line)
 {
-	static char		*rest = NULL;
+	static t_list	*begin_list = NULL;
+	t_list			*file;
 	char			buffer[BUFF_SIZE + 1];
 	int				check;
 
-	if ((!line || fd < 0) || !(check = rest_instance(rest, line)))
-		return (gnl_free_bis(line, &rest, 0));
+	if ((!line || fd < 0) || !(file = check_fd(&begin_list, (size_t)fd)) ||
+	!(check = rest_instance(file, line)))
+		return (gnl_free(line, &begin_list, 0));
 	if (check == 1)
 		return (1);
 	while ((check = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[check] = '\0';
-		if (!(check = get_line(buffer, rest, line)) || check == 1)
-			return (gnl_free_bis(line, &rest, check));
+		if (!(check = get_line(buffer, file, line)) || check == 1)
+			return (gnl_free(line, &begin_list, check));
 	}
 	if (*line && *line[0] != '\0')
 		return (1);
@@ -114,5 +130,5 @@ int					get_next_line(const int fd, char **line)
 		ft_strdel(line);
 		return (0);
 	}
-	return (gnl_free_bis(line, &rest, 0));
+	return (gnl_free(line, &begin_list, 0));
 }

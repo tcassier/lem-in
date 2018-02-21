@@ -6,13 +6,13 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 19:36:41 by tcassier          #+#    #+#             */
-/*   Updated: 2018/01/12 19:36:42 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/21 19:11:50 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char const *s)
+int	ft_putstr(char const *s)
 {
-	write(1, s, ft_strlen(s));
+	return (write(1, s, ft_strlen(s)));
 }

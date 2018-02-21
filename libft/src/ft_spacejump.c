@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_spacejump.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/12 19:37:54 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/21 19:22:32 by tcassier         ###   ########.fr       */
+/*   Created: 2018/02/20 09:08:07 by tcassier          #+#    #+#             */
+/*   Updated: 2018/02/20 09:09:32 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strdel(char **as)
+char	*ft_spacejump(char *str)
 {
-	free(*as);
-	*as = NULL;
+	while (ft_isspace(*str) && *str)
+		str++;
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 20:02:47 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/15 20:57:55 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/21 19:34:58 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,16 @@ void				ft_pr_getsize(t_print *data, t_list *chunk);
 void				ft_pr_process(t_list *lst, t_print *data, va_list ap);
 void				ft_pr_unicode(char str[5], int byte, wchar_t c);
 int					ft_printf(const char *format, ...);
-void				ft_putchar(char c);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putendl(char const *s);
-void				ft_putendl_fd(char const *s, int fd);
+int					ft_putchar(char c);
+int					ft_putchar_fd(char c, int fd);
+int					ft_putendl(char const *s);
+int					ft_putendl_fd(char const *s, int fd);
 char				*ft_strinsert(char **ad, char **str, size_t where, char c);
 void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putstr(char const *s);
-void				ft_putstr_fd(char const *s, int fd);
+int					ft_putstr(char const *s);
+int					ft_putstr_fd(char const *s, int fd);
+char				*ft_spacejump(char *str);
 int					ft_sprintf(char **str, const char *format, ...);
 int					ft_sqrt(int n);
 char				*ft_strappend(char **s1, char **s2, char c);
@@ -160,4 +161,6 @@ char				*ft_uimaxtoa_base(uintmax_t n, int base);
 int					ft_wchar_byte(wchar_t c);
 size_t				ft_wstrlen(wchar_t *wstr);
 int					get_next_line(const int fd, char **line);
+int					get_next_line_bis(const int fd, char **line);
+int					gnl_free(char **line, t_list **begin_list, int check);
 #endif

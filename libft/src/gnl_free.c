@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   gnl_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/12 19:37:54 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/21 19:22:32 by tcassier         ###   ########.fr       */
+/*   Created: 2018/02/19 15:48:47 by tcassier          #+#    #+#             */
+/*   Updated: 2018/02/21 19:34:52 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strdel(char **as)
+int		gnl_free(char **line, t_list **begin_list, int check)
 {
-	free(*as);
-	*as = NULL;
+	if (!check)
+	{
+		if (line && *line)
+			ft_strdel(line);
+		if (*begin_list)
+			ft_lstdel(begin_list, &ft_memdel_bis);
+	}
+	return (check == 0 ? -1 : 1);
 }
