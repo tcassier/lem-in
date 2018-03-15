@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 20:02:47 by tcassier          #+#    #+#             */
-/*   Updated: 2018/02/21 19:34:58 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/02/27 11:58:40 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,5 @@ char				*ft_uimaxtoa_base(uintmax_t n, int base);
 int					ft_wchar_byte(wchar_t c);
 size_t				ft_wstrlen(wchar_t *wstr);
 int					get_next_line(const int fd, char **line);
-int					get_next_line_bis(const int fd, char **line);
 int					gnl_free(char **line, t_list **begin_list, int check);
 #endif

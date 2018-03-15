@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 00:54:05 by tcassier          #+#    #+#             */
-/*   Updated: 2018/01/20 01:47:44 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/03/13 08:25:39 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ int			ft_dprintf(const int fd, const char *format, ...)
 		tmp = lst;
 		while (tmp)
 		{
-			write(fd, (char*)tmp->content, tmp->content_size);
+			if (write(fd, (char*)tmp->content, tmp->content_size) < 0)
+			{
+				ret = -1;
+				break ;
+			}
 			tmp = tmp->next;
 		}
 	}
@@ -70,7 +74,11 @@ int			ft_printf(const char *format, ...)
 		tmp = lst;
 		while (tmp)
 		{
-			write(1, (char*)tmp->content, tmp->content_size);
+			if (write(1, (char*)tmp->content, tmp->content_size) < 0)
+			{
+				ret = -1;
+				break ;
+			}
 			tmp = tmp->next;
 		}
 	}
