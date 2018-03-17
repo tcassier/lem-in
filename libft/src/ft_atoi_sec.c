@@ -6,7 +6,7 @@
 /*   By: tcassier <tcassier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 19:25:44 by tcassier          #+#    #+#             */
-/*   Updated: 2018/03/01 17:21:08 by tcassier         ###   ########.fr       */
+/*   Updated: 2018/03/17 16:44:35 by tcassier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int					ft_atoi_sec(const char *str)
 		str++;
 	while (ft_isdigit(str[index]))
 		index++;
-	if ((index > 9 && ((str[index - 1] - '0' > 7 && sign == 1) ||
-	(str[index - 1] - '0' > 8 && sign == -1))) || index > 10)
+	if ((index == 10 && (((str[index - 1] - '0' > 7 && sign == 1) ||
+	(str[index - 1] - '0' > 8 && sign == -1)) &&
+	!ft_strncmp("214748364", str, 9))) || index > 10)
 		return (-1);
 	index = 0;
 	while (ft_isdigit(str[index]))
